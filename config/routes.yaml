@@ -1,0 +1,19 @@
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
+
+api_login_check:
+    path: /api/login_check
+
+app_register:
+    path: /api/registration
+    controller: 'App\Controller\RegistrationController::registration'
+    methods: ['POST']

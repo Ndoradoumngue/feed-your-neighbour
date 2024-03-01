@@ -1,0 +1,41 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+    # Configuration par défaut pour les services dans *ce* fichier
+    _defaults:
+        autowire: true      # Injecte automatiquement les dépendances dans vos services.
+        autoconfigure: true # Enregistre automatiquement vos services en tant que commandes, abonnements d'événements, etc.
+
+    # Rend les classes dans src/ disponibles pour être utilisées comme services
+    # Cela crée un service par classe dont l'ID est le nom de classe entièrement qualifié
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # Ajoutez plus de définitions de services lorsque vous avez besoin d'une configuration explicite
+    # Notez que les dernières définitions remplacent toujours les précédentes
+
+    # Service pour l'exception AnnouncementNotFoundException
+    app.exception.announcement_not_found:
+        class: App\Exceptions\AnnouncementNotFoundException
+        arguments:
+            $announcementId: '123'  # Remplacez par une valeur réelle si nécessaire
+
+    # Service pour l'exception AnnouncementServiceException
+    app.exception.announcement_service:
+        class: App\Exceptions\AnnouncementServiceException
+        arguments:
+            $message: 'Erreur lors du traitement de la demande'
+
+    App\Exceptions\MessageException:
+        arguments:
+            $message: 'Votre message par défaut ici'
+        public: true

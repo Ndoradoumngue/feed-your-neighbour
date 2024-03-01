@@ -1,0 +1,9 @@
+//migartion 
+php bin/console make:migration
+
+#creer les tables
+php bin/console doctrine:migrations:migrate
+
+
+// start the web socket server: 
+php bin/console app:fyn-websocket-server
